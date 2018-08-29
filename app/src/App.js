@@ -7,7 +7,8 @@ const Menu = props => {
       <h1>Teams</h1>
       <ul>
         <li>
-          <Link to="/teams">Teams</Link>
+          Teams Go Here
+          {/* <Link to="/teams">Teams</Link>*/}
         </li>
       </ul>
     </div>
