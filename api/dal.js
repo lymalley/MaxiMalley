@@ -17,32 +17,54 @@ const COUCHDB_DBNAME = process.env.COUCHDB_DBNAME
 const DB_URL = `${COUCHDB_SERVER}${COUCHDB_DBNAME}`
 
 const db = new PouchDB(DB_URL)
-const { getAllDocs } = require('./dal-helper')
+const { getAllDocs } = require('./lib/dal-helper')
 const pkGen = require('./lib/pkGen')
 
-const getTeams = query => {
+const listTeams = () =>
+  db
+    .allDocs({
+      include_docs: true,
+      startkey: 'team_',
+      endkey: 'team_\ufff0'
+    })
+    .then(doc => map(row => propOr({}, 'doc', row), propOr([], 'rows', doc)))
+
+const getTeam = id => db.get(id)
+
+const listPicks = query => {
   const [key, value] = not(isEmpty(query)) ? split(':', query) : ['', '']
 
   return getAllDocs(db, {
     include_docs: true,
-    startkey: 'team_',
-    endkey: 'team_\ufff0'
+    startkey: 'pick_',
+    endkey: 'pick_\ufff0'
   }).then(
-    teams =>
+    picks =>
       isEmpty(query)
-        ? teams
-        : filter(team => contains(value, propOr('', key, team)), teams)
+        ? picks
+        : filter(pick => contains(value, propOr('', key, pick)), pickss)
   )
 }
 
-const getTeam = id => db.get(id)
+const getPick = id => db.get(id)
 
-const updateTeam = id => {
+const updatePick = id => {
   return db.put(id)
 }
 
+const postPick = pick => {
+  const newPick = merge(pick, {
+    _id: pkGen('pick_', `${pick.user}T${pick.week}`),
+    type: 'pick'
+  })
+  return db.put(newPick)
+}
+
 module.exports = {
-  getTeams,
+  listTeams,
   getTeam,
-  updateTeam
+  updatePick,
+  listPicks,
+  getPick,
+  postPick
 }

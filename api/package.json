@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm server.js",
+    "start": "nodemon server.js",
     "dev": "nodemon server.js",
-    "loadData": "npm load-data.js"
+    "loadData": "node loadData.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

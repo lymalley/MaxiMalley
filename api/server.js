@@ -1,12 +1,26 @@
-const express = require('express')
+require('dotenv').config()
+const PORT = process.env.PORT
+const app = require('express')()
+const bodyParser = require('body-parser')
+const picks = require('./routes/picks')
+const teams = require('./routes/teams')
 const cors = require('cors')
 
-const app = express()
 app.use(cors({ credentials: true }))
+app.use(bodyParser.json())
 
-// load routes here
+app.get('/', (req, res, next) => {
+  res.status(200).send('MaxiMalley API Server')
+})
 
-app.get('/', (req, res) => res.send('MaxiMalley API Server'))
+picks(app)
+teams(app)
 
-app.listen(5000)
-console.log('Server listening at 5000')
+app.use((err, req, res, next) => {
+  res.status(err.status || 500).send(err.message)
+  console.log('ERROR: ', err)
+})
+
+app.listen(PORT || 5000, () =>
+  console.log('MaxiMalley API is up on ', PORT || 5000)
+)
