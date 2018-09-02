@@ -6,12 +6,13 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import App from './App'
 //import registerServiceWorker from './registerServiceWorker'
 
-ReactDOM.render(
-  <Provider
-  //store={store}
-  >
+ReactDOM.render(<App />, document.getElementById('root'))
+//registerServiceWorker()
+
+{
+  /*
+ <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
-)
-//registerServiceWorker()
+*/
+}
