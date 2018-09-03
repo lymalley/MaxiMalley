@@ -7,6 +7,7 @@
     "@material-ui/icons": "^3.0.1",
     "auth0-js": "^9.7.3",
     "classnames": "^2.2.6",
+    "ez-local-time": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
     "ramda": "^0.25.0",
     "react": "^16.4.2",

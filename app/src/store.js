@@ -2,13 +2,18 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 //import { drawer } from './reducers/drawer'
 
-import { getTeams } from './reducers/teams'
+import { picks, currentPick, newPick } from './reducers/picks'
+import { users, currentUser } from './reducers/users'
 
 const store = createStore(
   combineReducers({
-    getTeams
+    picks,
+    currentPick,
+    newPick,
+    users,
+    currentUser
   }),
   applyMiddleware(thunk)
 )
 
-//export default store
+export default store

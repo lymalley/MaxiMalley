@@ -60,11 +60,29 @@ const postPick = pick => {
   return db.put(newPick)
 }
 
+const listUsers = () =>
+  db
+    .allDocs({
+      include_docs: true,
+      startkey: 'user_',
+      endkey: 'user_\ufff0'
+    })
+    .then(doc => map(row => propOr({}, 'doc', row), propOr([], 'rows', doc)))
+
+const getUser = id => db.get(id)
+
+const updateUser = id => {
+  return db.put(id)
+}
+
 module.exports = {
   listTeams,
   getTeam,
   updatePick,
   listPicks,
   getPick,
-  postPick
+  postPick,
+  listUsers,
+  getUser,
+  updateUser
 }
