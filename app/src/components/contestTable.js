@@ -1,11 +1,24 @@
 class UserRow extends React.Component {
   render() {
     const user = this.props.user
-    return (
-      <tr>
-        <th colSpan="2">{category}</th>
-      </tr>
-    )
+    const userStatus = this.props.user.status
+    if (userStatus === 'active') {
+      return (
+        <tr>
+          <th colSpan="2" style={{ color: secondary }}>
+            {user.name}
+          </th>
+        </tr>
+      )
+    } else {
+      return (
+        <tr>
+          <th colSpan="2" style={{ color: primary }}>
+            {user.name}
+          </th>
+        </tr>
+      )
+    }
   }
 }
 
@@ -27,21 +40,16 @@ class ProductRow extends React.Component {
   }
 }
 
-class ProductTable extends React.Component {
+class UserTable extends React.Component {
   render() {
     const rows = []
     let lastCategory = null
 
-    this.props.products.forEach(product => {
-      if (product.category !== lastCategory) {
-        rows.push(
-          <ProductCategoryRow
-            category={product.category}
-            key={product.category}
-          />
-        )
+    this.props.users.forEach(user => {
+      if (user.pick !== lastCategory) {
+        rows.push(<UserRow category={user.pick} key={user.name} />)
       }
-      rows.push(<ProductRow product={product} key={product.name} />)
+      rows.push(<UserRow product={product} key={product.name} />)
       lastCategory = product.category
     })
 
@@ -55,19 +63,6 @@ class ProductTable extends React.Component {
         </thead>
         <tbody>{rows}</tbody>
       </table>
-    )
-  }
-}
-
-class SearchBar extends React.Component {
-  render() {
-    return (
-      <form>
-        <input type="text" placeholder="Search..." />
-        <p>
-          <input type="checkbox" /> Only show products in stock
-        </p>
-      </form>
     )
   }
 }

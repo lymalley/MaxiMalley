@@ -1,0 +1,1 @@
+team: { name: '', teamId: '', available: true, thursday: '', bye: '' },
