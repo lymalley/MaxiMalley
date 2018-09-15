@@ -11,34 +11,48 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
 
-const one = ({ if (pick.weekId === 'one') { return pick.team})
-const two = pick.week.two.team
-const three = pick.week.three.team
-const four = pick.week.four.team
-const five = pick.week.five.team
-const six = pick.week.six.team
-const seven = pick.week.seven.team
-const eight = pick.week.eight.team
-const nine = pick.week.nine.team
-const ten = pick.week.ten.team
-
-const isActive = user.status
-
 const UserPicks = user => (
-  <div key={pick._userId}>
+  <tr key={user._id}>
+    <th scope="col">{user.username}</th>
+    <td scope="col">{user.pick1TeamName}</td>
+  </tr>
+)
+
+export default UserPicks
+
+{
+  /*
+   <tr scope="row" key={user._id}>
+     </tr>
+
+
+<div key={pick._userId}>
     <Link to={`/picks/${pick._userId}`} className="router-link">
       <ListItem button>
         <ListItemText>
           <Typography variant="headline">
-            {`${
+            {
               user.name
-            } ${one} ${two} ${three} ${four} ${five} ${six} ${seven} ${eight} ${nine} ${ten}`}
+            }
           </Typography>
         </ListItemText>
       </ListItem>
     </Link>
     <Divider />
   </div>
-)
 
-export default UserPicks
+
+{user.status !== 'active' ? (
+  <tr><s>
+<td>user.name</td>
+<td></td>
+</s></tr>
+) : (
+  <tr><s>
+  <td>user.name</td>
+  <td></td>
+  </s></tr>
+
+)}
+*/
+}

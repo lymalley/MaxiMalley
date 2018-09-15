@@ -4,6 +4,8 @@ import thunk from 'redux-thunk'
 
 import { picks, currentPick, newPick } from './reducers/picks'
 import { users, currentUser } from './reducers/users'
+import { weeks, currentWeek } from './reducers/weeks'
+import { teams, currentTeam } from './reducers/teams'
 
 const store = createStore(
   combineReducers({
@@ -11,7 +13,11 @@ const store = createStore(
     currentPick,
     newPick,
     users,
-    currentUser
+    currentUser,
+    weeks,
+    currentWeek,
+    teams,
+    currentTeam
   }),
   applyMiddleware(thunk)
 )

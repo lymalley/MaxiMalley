@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import store from './store'
+import { setUsers } from './action-creators/users'
 
 import App from './App'
-//import registerServiceWorker from './registerServiceWorker'
-
-//ReactDOM.render(<App />, document.getElementById('root'))
-//registerServiceWorker()
+import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -16,3 +14,6 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 )
+registerServiceWorker()
+
+store.dispatch(setUsers)

@@ -20,6 +20,10 @@ const db = new PouchDB(DB_URL)
 const { getAllDocs } = require('./lib/dal-helper')
 const pkGen = require('./lib/pkGen')
 
+////////////////
+////TEAMS///////
+///////////////
+
 const listTeams = () =>
   db
     .allDocs({
@@ -31,20 +35,35 @@ const listTeams = () =>
 
 const getTeam = id => db.get(id)
 
-const listPicks = query => {
-  const [key, value] = not(isEmpty(query)) ? split(':', query) : ['', '']
+////////////////
+////WEEKS///////
+///////////////
 
-  return getAllDocs(db, {
-    include_docs: true,
-    startkey: 'pick_',
-    endkey: 'pick_\ufff0'
-  }).then(
-    picks =>
-      isEmpty(query)
-        ? picks
-        : filter(pick => contains(value, propOr('', key, pick)), pickss)
-  )
-}
+const listWeeks = () =>
+  db
+    .allDocs({
+      include_docs: true,
+      startkey: 'week_',
+      endkey: 'week_\ufff0'
+    })
+    .then(doc => map(row => propOr({}, 'doc', row), propOr([], 'rows', doc)))
+
+const getWeek = id => db.get(id)
+
+//////////////////////
+///////PICKS/////////
+////////////////////
+
+const listPicks = query =>
+  // const [key, value] = not(isEmpty(query)) ? split(':', query) : ['', '']
+
+  db
+    .allDocs({
+      include_docs: true,
+      startkey: 'pick_',
+      endkey: 'pick_\ufff0'
+    })
+    .then(doc => map(row => propOr({}, 'doc', row), propOr([], 'rows', doc)))
 
 const getPick = id => db.get(id)
 
@@ -54,11 +73,15 @@ const updatePick = id => {
 
 const postPick = pick => {
   const newPick = merge(pick, {
-    _id: pkGen('pick_', `${pick.user}T${pick.week}`),
+    _id: pkGen('pick_', `${pick.userId}-${pick.weekId}`),
     type: 'pick'
   })
   return db.put(newPick)
 }
+
+/////////////////////
+//////USERS/////////
+//////////////////
 
 const listUsers = () =>
   db
@@ -84,5 +107,7 @@ module.exports = {
   postPick,
   listUsers,
   getUser,
-  updateUser
+  updateUser,
+  listWeeks,
+  getWeek
 }

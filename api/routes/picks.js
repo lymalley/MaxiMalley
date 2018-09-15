@@ -20,7 +20,10 @@ const pickRoutes = app => {
 
   app.post('/picks', bodyParser.json(), (req, res, next) => {
     const newPick = propOr({}, 'body', req)
-    const missingFields = checkRequiredFields(['week', 'user', 'team'], newPick)
+    const missingFields = checkRequiredFields(
+      ['weekId', 'userId', 'teamId', 'pickStatus', 'locked'],
+      newPick
+    )
     if (not(isEmpty(missingFields))) {
       next(
         new NodeHTTPError(
@@ -30,7 +33,10 @@ const pickRoutes = app => {
       )
     }
 
-    const finalObj = cleanObj(['week', 'user', 'team'], newPick)
+    const finalObj = cleanObj(
+      ['weekId', 'userId', 'teamId', 'pickStatus', 'locked'],
+      newPick
+    )
     postPick(finalObj)
       .then(added => {
         console.log(added)
@@ -51,7 +57,16 @@ const pickRoutes = app => {
       return
     }
     const missingFields = checkRequiredFields(
-      ['_id', '_rev', 'type', 'week', 'user', 'team'],
+      [
+        '_id',
+        '_rev',
+        'type',
+        'weekId',
+        'userId',
+        'teamId',
+        'pickStatus',
+        'locked'
+      ],
       updatedPick
     )
 
@@ -60,7 +75,16 @@ const pickRoutes = app => {
       return
     }
     const finalObj = cleanObj(
-      ['_id', '_rev', 'type', 'week', 'user', 'team'],
+      [
+        '_id',
+        '_rev',
+        'type',
+        'weekId',
+        'userId',
+        'teamId',
+        'pickStatus',
+        'locked'
+      ],
       updatedPick
     )
 

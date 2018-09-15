@@ -24,17 +24,10 @@ const initialCurrentPick = {
     _id: '',
     _rev: '',
     type: 'pick',
-    user: { userId: '', userName: '', userStatus: 'active' },
-    team: { name: '', teamId: '', available: true, thursday: '', bye: '' },
-    week: {
-      weekId: '',
-      number: 1,
-      deadLine: '',
-      thursDeadline: '',
-      isCurrent: false
-    },
-    pickTime: '',
-    pickStatus: 'win',
+    userId: '',
+    teamId: '',
+    weekId: '',
+    pickStatus: 'undetermined',
     locked: false
   },
   isError: false,
@@ -59,17 +52,10 @@ export const currentPick = (state = initialCurrentPick, action) => {
 const initialNewPick = {
   data: {
     type: 'pick',
-    user: { userId: '', userName: '', userStatus: 'active' },
-    team: { name: '', teamId: '', available: true, thursday: '', bye: '' },
-    week: {
-      weekId: '',
-      number: 1,
-      deadLine: '',
-      thursDeadline: '',
-      isCurrent: false
-    },
-    pickTime: '',
-    pickStatus: 'win',
+    userId: '',
+    teamId: '',
+    weekId: '',
+    pickStatus: 'undetermined',
     locked: false
   },
   isSaving: false,

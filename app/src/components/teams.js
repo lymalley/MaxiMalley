@@ -1,3 +1,5 @@
+{
+  /* 
 import React from 'react'
 import keyIndex from 'react-key-index'
 import PropTypes from 'prop-types'
@@ -95,9 +97,7 @@ class TeamsList extends React.Component {
 }
 
 export default withStyles(styles)(TeamsList)
-
-{
-  /*    let state = {
+   let state = {
       team: []
     }
 
@@ -131,5 +131,6 @@ export default withStyles(styles)(TeamsList)
   }
 }
 
-export default withStyles(styles)(TeamsList)*/
+export default withStyles(styles)(TeamsList)
+*/
 }
